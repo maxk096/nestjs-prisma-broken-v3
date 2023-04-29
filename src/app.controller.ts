@@ -5,8 +5,13 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  users() {
-    throw new BadRequestException();
+  @Get('/rejectOnNotFound')
+  rejectOnNotFound() {
+    return this.appService.rejectOnNotFound();
+  }
+
+  @Get('/badRequestException')
+  badRequestException() {
+    throw new BadRequestException('Bad Request');
   }
 }

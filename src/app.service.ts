@@ -5,7 +5,12 @@ import { PrismaService } from 'nestjs-prisma';
 export class AppService {
   constructor(private prisma: PrismaService) {}
 
-  users() {
-    return this.prisma.user.findMany();
+  rejectOnNotFound() {
+    return this.prisma.user.findFirst({
+      where: {
+        email: 'non-existing@email.io',
+      },
+      rejectOnNotFound: true,
+    });
   }
 }
